@@ -1,33 +1,31 @@
-// Getting Elements From The DOM
-const ratings = document.querySelectorAll(".ratings");
 const ratingsContainer = document.querySelector(".ratings-container");
-const sendBtn = document.querySelector("#send");
+const ratings = document.querySelectorAll(".rating");
 const panel = document.querySelector("#panel");
+const send = document.querySelector("#send");
+let feedback = "Neutral";
 
-let selectedRating = "Satisfied";
+let active = document.querySelector(".active");
 
-// Attaching Event
-ratingsContainer.addEventListener("click", (e) => {
-  if (e.target.parentNode.classList.contains("rating")) {
-    console.log(e.target.classList.contains("rating"));
+const removeActive = () => {
+  active.classList.remove("active");
+  active = null;
+};
+
+ratings.forEach((rating) => {
+  rating.addEventListener("click", () => {
     removeActive();
-
-    e.target.parentNode.classList.add("active");
-    selectedRating = e.target.nextElementSibling.innerHTML;
-  }
+    feedback = rating.children[1].innerHTML;
+    rating.classList.add("active");
+    active = rating;
+  });
 });
 
-sendBtn.addEventListener("click", () => {
+send.addEventListener("click", () => {
+  removeActive();
   panel.innerHTML = `
-    <p class="heart">💖</p>
-    <strong>Thank You! </strong>
-    <br>
-    <strong>Feedback: ${selectedRating} </strong>
+  <p class="heart">💖</p>
+  <strong>Thank You!></strong>
+  <br>
+  <strong>Feedback: ${feedback}</strong>
   `;
 });
-
-function removeActive() {
-  for (let i = 0; i < ratings.length; i++) {
-    ratings[i].classList.remove("active");
-  }
-}
