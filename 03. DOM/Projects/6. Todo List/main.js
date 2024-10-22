@@ -1,37 +1,28 @@
-let form = document.querySelector("form");
-let input = document.querySelector("input");
-let todos = document.querySelector(".todos");
+const form = document.querySelector("form");
+const input = document.querySelector("input");
+const todos = document.querySelector(".todos");
 
-function getTodo(value) {
-  // Creating New Elements
-  let todo = document.createElement("div");
-  let textEl = document.createElement("span");
-
-  // Setting values & Styles
-  textEl.innerHTML = value;
-
-  // Appending Our Element To The DOM
-  todo.appendChild(textEl);
-
-  let closeEl = document.createElement("span");
-  closeEl.innerHTML = "&times;";
-  closeEl.classList.add("delete");
-
-  // Attaching Events
-  closeEl.addEventListener("click", function (e) {
-    todos.removeChild(todo);
-  });
-
-  todo.appendChild(closeEl);
+const createTodo = () => {
+  const todo = document.createElement("div");
   todo.classList.add("todo");
-  return todo;
-}
+
+  const text = document.createElement("span");
+  text.innerText = input.value;
+  todo.appendChild(text);
+
+  const close = document.createElement("span");
+  close.innerHTML = "&times;";
+  close.classList.add("delete");
+  close.addEventListener("click", () => {
+    todo.remove();
+  });
+  todo.appendChild(close);
+  todos.appendChild(todo);
+};
 
 form.addEventListener("submit", (e) => {
-  // preventing the default behavior
   e.preventDefault();
-  let value = input.value;
-  if (!value.trim()) return;
-  todos.appendChild(getTodo(value));
+  if (!input.value.trim()) return;
+  createTodo();
   input.value = "";
 });
