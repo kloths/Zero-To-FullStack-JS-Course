@@ -44,6 +44,10 @@ body {
   background-color: teal;
 }
 
+.skyblue {
+  background-color: skyblue;
+}
+
 .content-container {
   height: 100vh;
   display: flex;
