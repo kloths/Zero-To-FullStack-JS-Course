@@ -1,23 +1,14 @@
-const insert = document.getElementById("insert");
+const insert = document.querySelector("#insert");
 
-window.addEventListener("keydown", (event) => {
-  // if its ' ' then put out Space or else put out whatever key is
+window.addEventListener("keydown", (e) => {
   insert.innerHTML = `
   <div class="key">
-  ${event.key === " " ? "Space" : event.key} 
-  <small>event.key</small>
-</div>
-
-  <div class="key">
-    ${event.keyCode}
-    <small>event.keyCode</small>
+    ${e.key === " " ? "Space" : e.key}
+    <small>event.key</small>
   </div>
-
   <div class="key">
-    ${event.code}
+    ${e.code}
     <small>event.code</small>
   </div>
   `;
 });
-
-// keyCode is deprecated
